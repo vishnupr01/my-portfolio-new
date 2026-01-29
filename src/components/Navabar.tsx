@@ -33,7 +33,7 @@ export default function Navbar() {
           onClick={() => scrollToSection("hero")}
           className="font-space text-xl font-bold text-primary cursor-pointer"
         >
-          Vishnu<span className="text-accent">.</span>
+          Vishnu<span className="text-accent"></span>
         </h1>
 
         <ul className="hidden md:flex gap-10 text-sm text-gray-300">
