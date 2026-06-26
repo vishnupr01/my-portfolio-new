@@ -1,4 +1,5 @@
 import Navbar from "./components/Navabar";
+import MarqueeBelt from "./components/MarqueeBelt";
 import Hero from "./sections/Hero";
 import About from "./sections/About";
 import Skills from "./sections/Skills";
@@ -12,8 +13,9 @@ function App() {
   return (
     <div className="min-h-screen bg-dark text-white font-inter overflow-x-hidden">
       <Navbar />
-      <main className="pt-20">
+      <main>
         <Hero />
+        <MarqueeBelt />
         <About />
         <Skills />
         <Experience />

@@ -1,63 +1,91 @@
 import { motion } from "framer-motion";
 
+const bento = [
+  { span: "col-span-2", value: "2+", label: "Years of production experience" },
+  { span: "", value: "7", label: "Microservices\narchitected" },
+  { span: "", value: "10k+", label: "Concurrent\nconnections" },
+  { span: "", value: "GPU", label: "AI proctoring\ndeployed to prod" },
+  { span: "", value: "Nx CI/CD", label: "Affected builds\npipeline" },
+];
+
 export default function About() {
   return (
-    <section id="about" className="py-24 bg-dark text-white">
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-14 items-center">
-        
-        {/* Left Content */}
-        <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="font-space text-4xl font-bold mb-6">
-            About <span className="text-primary">Me</span>
-          </h2>
+    <section id="about" className="py-32 border-b border-white/[0.06] relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
 
-          <p className="text-gray-400 leading-relaxed mb-6">
-            I’m a Software Engineer with <span className="text-white font-medium">2+ years of experience</span> 
-            building scalable backend systems, real-time communication platforms, 
-            and cloud-native applications.
-          </p>
+        {/* Section label */}
+        <div className="flex items-center gap-3 mb-20">
+          <span className="text-[9px] font-mono text-white/22 tracking-widest">01</span>
+          <div className="w-7 h-px bg-white/14" />
+          <span className="text-[9px] font-mono text-white/22 uppercase tracking-[0.25em]">About</span>
+        </div>
 
-          <p className="text-gray-400 leading-relaxed mb-6">
-            I specialize in the <span className="text-white font-medium">MERN stack</span>, real-time systems 
-            using <span className="text-white font-medium">Socket.IO & WebRTC</span>, and designing 
-            <span className="text-white font-medium">high-performance cloud architectures</span> on AWS.
-          </p>
+        <div className="grid lg:grid-cols-2 gap-20 items-start">
 
-          <p className="text-gray-400 leading-relaxed">
-            I enjoy solving complex engineering problems, optimizing system performance, 
-            and building products that scale to thousands of users.
-          </p>
-        </motion.div>
-
-        {/* Right Stats */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="grid grid-cols-2 gap-6"
-        >
-          {[
-            { value: "2+", label: "Years Experience" },
-            { value: "50k+", label: "Users Impacted" },
-            { value: "10k+", label: "Realtime Connections" },
-            { value: "75%", label: "API Latency Reduced" }
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur hover:border-primary/40 transition"
+          {/* ── Left ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h2
+              className="font-space font-bold text-white leading-[1.05] mb-10"
+              style={{ fontSize: "clamp(36px, 4.5vw, 60px)" }}
             >
-              <h3 className="text-3xl font-bold text-primary">{item.value}</h3>
-              <p className="text-gray-400 text-sm mt-2">{item.label}</p>
-            </div>
-          ))}
-        </motion.div>
+              Backend engineer<br />
+              building systems<br />
+              <span className="text-white/22">that scale.</span>
+            </h2>
 
+            <div className="space-y-5 text-[13px] leading-relaxed text-white/38">
+              <p>
+                Backend Software Engineer with{" "}
+                <span className="text-white/80">2+ years</span> designing and
+                shipping production-grade distributed systems — currently
+                leading full backend architecture for an early-stage platform.
+              </p>
+              <p>
+                Making tech stack decisions, designing{" "}
+                <span className="text-white/80">microservices from scratch</span>,
+                and deploying AI models to production via Docker, AWS ECR, and
+                GitHub CI/CD pipelines.
+              </p>
+              <p>
+                Hands-on expertise in{" "}
+                <span className="text-white/80">NestJS, gRPC, PostgreSQL, Prisma,
+                and real-time systems</span>. Strong foundation in cloud
+                infrastructure, containerization, and async job processing.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* ── Right: Bento ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-2 gap-2"
+          >
+            {bento.map((item, i) => (
+              <div
+                key={i}
+                className={`${item.span} border border-white/[0.07] rounded-lg p-6 hover:border-white/18 hover:bg-white/[0.02] transition-all duration-300 group`}
+              >
+                <span className="block font-space font-bold text-white mb-2 group-hover:translate-x-0.5 transition-transform"
+                  style={{ fontSize: i === 0 ? "clamp(36px,4vw,56px)" : "clamp(26px,3vw,36px)" }}
+                >
+                  {item.value}
+                </span>
+                <p className="text-[10px] font-mono text-white/25 uppercase tracking-wider leading-snug whitespace-pre-line">
+                  {item.label}
+                </p>
+              </div>
+            ))}
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );

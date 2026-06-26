@@ -3,66 +3,91 @@ import { projects } from "../data/projects";
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 bg-dark">
-      <div className="max-w-7xl mx-auto px-6">
-        
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="font-space text-4xl font-bold text-center mb-16"
-        >
-          Featured <span className="text-primary">Projects</span>
-        </motion.h2>
+    <section id="projects" className="py-32 border-b border-white/[0.06]">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
 
-        <div className="grid md:grid-cols-2 gap-10">
+        {/* Section label */}
+        <div className="flex items-center gap-3 mb-20">
+          <span className="text-[9px] font-mono text-white/22 tracking-widest">04</span>
+          <div className="w-7 h-px bg-white/14" />
+          <span className="text-[9px] font-mono text-white/22 uppercase tracking-[0.25em]">Projects</span>
+        </div>
+
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <h2
+            className="font-space font-bold text-white leading-[1.0]"
+            style={{ fontSize: "clamp(36px, 4.5vw, 60px)" }}
+          >
+            Personal<br />
+            <span className="text-white/22">Projects</span>
+          </h2>
+          <p className="text-[11px] font-mono text-white/25 max-w-xs leading-relaxed">
+            Side projects built to explore real engineering problems end-to-end.
+          </p>
+        </div>
+
+        {/* Numbered list */}
+        <div className="divide-y divide-white/[0.06]">
           {projects.map((project, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur hover:border-primary/40 hover:scale-[1.02] transition"
+              transition={{ delay: idx * 0.08, duration: 0.6 }}
+              className="group py-10 hover:bg-white/[0.018] transition-colors -mx-6 md:-mx-12 px-6 md:px-12"
             >
-              <h3 className="text-xl font-semibold mb-3">
-                {project.title}
-              </h3>
+              <div className="flex items-start gap-6 md:gap-10">
 
-              <p className="text-gray-400 mb-6">
-                {project.description}
-              </p>
+                {/* Index number */}
+                <span className="text-[10px] font-mono text-white/18 mt-1 shrink-0 w-5">
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
 
-              <div className="flex flex-wrap gap-3 mb-6">
-                {project.tech.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 rounded-lg bg-white/10 text-sm"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-3 mb-4">
+                    <h3 className="text-lg font-semibold text-white/80 group-hover:text-white transition-colors leading-tight">
+                      {project.title}
+                    </h3>
+                    <div className="flex items-center gap-5 shrink-0">
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[11px] font-mono text-white/25 hover:text-white transition-colors"
+                      >
+                        GitHub →
+                      </a>
+                      {project.demo && (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-[11px] font-mono text-white/25 hover:text-white transition-colors"
+                        >
+                          Live →
+                        </a>
+                      )}
+                    </div>
+                  </div>
 
-              <div className="flex gap-6 text-sm">
-                <a
-                  href={project.github}
-                  target="_blank"
-                  className="text-primary hover:underline"
-                >
-                  GitHub →
-                </a>
+                  <p className="text-[13px] text-white/35 leading-relaxed mb-5 max-w-2xl">
+                    {project.description}
+                  </p>
 
-                {project.demo && (
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    className="text-accent hover:underline"
-                  >
-                    Live Demo →
-                  </a>
-                )}
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech.map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-[10px] font-mono text-white/22 border border-white/[0.08] px-2.5 py-0.5 rounded-sm"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
               </div>
             </motion.div>
           ))}

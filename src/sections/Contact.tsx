@@ -1,82 +1,86 @@
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaEnvelope, FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
+import {
+  FaGithub,
+  FaLinkedin,
+  FaEnvelope,
+  FaPhoneAlt,
+  FaWhatsapp,
+} from "react-icons/fa";
+
+const links = [
+  { num: "01", icon: FaEnvelope, label: "vpr6748@gmail.com", href: "mailto:vpr6748@gmail.com" },
+  { num: "02", icon: FaPhoneAlt, label: "+91 96563 99230", href: "tel:+919656399230" },
+  { num: "03", icon: FaLinkedin, label: "LinkedIn", href: "https://linkedin.com/in/vishnu-p-r-b46998247/", external: true },
+  { num: "04", icon: FaGithub, label: "GitHub", href: "https://github.com/vishnupr01", external: true },
+  { num: "05", icon: FaWhatsapp, label: "WhatsApp — +91 9207033463", href: "https://wa.me/919656399230", external: true },
+];
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-24 bg-dark border-t border-white/10">
-      <div className="max-w-5xl mx-auto px-6 text-center">
+    <section id="contact" className="py-32">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
 
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+        {/* Section label */}
+        <div className="flex items-center gap-3 mb-20">
+          <span className="text-[9px] font-mono text-white/22 tracking-widest">06</span>
+          <div className="w-7 h-px bg-white/14" />
+          <span className="text-[9px] font-mono text-white/22 uppercase tracking-[0.25em]">Contact</span>
+        </div>
+
+        {/* Big CTA heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="font-space text-4xl font-bold mb-6"
+          transition={{ duration: 0.7 }}
+          className="mb-20"
         >
-          Let’s <span className="text-primary">Connect</span>
-        </motion.h2>
-
-        <p className="text-gray-400 mb-14">
-          Have a project, startup idea, or job opportunity? Feel free to reach out.
-        </p>
-
-        {/* Contact Cards */}
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 mb-16">
-
-          {/* Phone */}
-          <motion.a
-            href="tel:+919656399230"
-            whileHover={{ scale: 1.05 }}
-            className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur hover:border-primary/40 transition block"
+          <h2
+            className="font-space font-bold text-white leading-none mb-0"
+            style={{ fontSize: "clamp(48px, 8vw, 120px)" }}
           >
-            <FaPhoneAlt className="text-3xl text-primary mx-auto mb-4" />
-            <h4 className="font-semibold">Mobile</h4>
-            <p className="text-gray-400 mt-1">+91 96563 99230</p>
-          </motion.a>
-
-          {/* Email */}
-          <motion.a
-            href="mailto:vpr6748@gmail.com"
-            whileHover={{ scale: 1.05 }}
-            className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur hover:border-primary/40 transition block"
+            Let's work
+          </h2>
+          <h2
+            className="font-space font-bold text-white/18 leading-none"
+            style={{ fontSize: "clamp(48px, 8vw, 120px)" }}
           >
-            <FaEnvelope className="text-3xl text-primary mx-auto mb-4" />
-            <h4 className="font-semibold">Email</h4>
-            <p className="text-gray-400 mt-1">vpr6748@gmail.com</p>
-          </motion.a>
+            together.
+          </h2>
+        </motion.div>
 
-          {/* WhatsApp */}
-          <motion.a
-            href="https://wa.me/919656399230"
-            target="_blank"
-            whileHover={{ scale: 1.05 }}
-            className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur hover:border-primary/40 transition block"
-          >
-            <FaWhatsapp className="text-3xl text-green-400 mx-auto mb-4" />
-            <h4 className="font-semibold">WhatsApp</h4>
-            <p className="text-gray-400 mt-1">+91 9207033463</p>
-          </motion.a>
-
-        </div>
-
-        {/* Social Icons */}
-        <div className="flex justify-center gap-8 text-3xl">
-          <a
-            href="https://github.com/vishnupr01"
-            target="_blank"
-            className="hover:text-primary transition"
-          >
-            <FaGithub />
-          </a>
-
-          <a
-            href="https://www.linkedin.com/in/vishnu-p-r-b46998247/"
-            target="_blank"
-            className="hover:text-primary transition"
-          >
-            <FaLinkedin />
-          </a>
-        </div>
+        {/* Contact links */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="max-w-2xl divide-y divide-white/[0.06]"
+        >
+          {links.map((link) => {
+            const Icon = link.icon;
+            return (
+              <a
+                key={link.num}
+                href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noreferrer" : undefined}
+                className="flex items-center gap-5 py-5 group"
+              >
+                <span className="text-[9px] font-mono text-white/18 w-5 shrink-0">
+                  {link.num}
+                </span>
+                <Icon className="text-sm text-white/25 group-hover:text-white transition-colors shrink-0" />
+                <span className="text-[13px] text-white/60 group-hover:text-white transition-colors flex-1">
+                  {link.label}
+                </span>
+                <span className="text-white/18 group-hover:text-white/50 group-hover:translate-x-1 transition-all text-xs">
+                  →
+                </span>
+              </a>
+            );
+          })}
+        </motion.div>
 
       </div>
     </section>
