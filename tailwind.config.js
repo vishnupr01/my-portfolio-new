@@ -1,28 +1,28 @@
 /** @type {import('tailwindcss').Config} */
+const token = (name) => `rgb(var(--${name}) / <alpha-value>)`;
+
 export default {
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       fontFamily: {
-        inter: ["Inter", "sans-serif"],
-        space: ["Space Grotesk", "sans-serif"],
-        mono: ["JetBrains Mono", "Fira Code", "Consolas", "monospace"],
+        sans: ["Geist", "Inter", "system-ui", "sans-serif"],
+        serif: ["'Instrument Serif'", "Georgia", "serif"],
+        mono: ["'Geist Mono'", "ui-monospace", "Consolas", "monospace"],
       },
       colors: {
-        primary: "#ffffff",
-        accent: "#737373",
-        dark: "#000000"
+        bg: token("bg"),
+        surface: token("surface"),
+        fg: token("fg"),
+        muted: token("muted"),
+        line: token("line"),
+        accent: token("accent"),
+        ok: token("ok"),
       },
-      animation: {
-        marquee: "marquee 35s linear infinite",
+      maxWidth: {
+        page: "1200px",
       },
-      keyframes: {
-        marquee: {
-          "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-50%)" },
-        },
-      },
-    }
+    },
   },
-  plugins: []
-}
+  plugins: [],
+};

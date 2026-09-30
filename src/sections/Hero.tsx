@@ -1,182 +1,108 @@
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import profile from "../assets/VISHNU.png";
+import { SiLeetcode } from "react-icons/si";
+import { FiArrowRight, FiDownload } from "react-icons/fi";
+import photo from "../assets/VISHNU.jpg";
+import { profile } from "../data/profile";
 
-const EASE = [0.16, 1, 0.3, 1] as const;
+const ease = [0.22, 1, 0.36, 1] as const;
+
+const socials = [
+  { href: profile.socials.github, label: "GitHub", icon: FaGithub },
+  { href: profile.socials.linkedin, label: "LinkedIn", icon: FaLinkedin },
+  { href: profile.socials.leetcode, label: "LeetCode", icon: SiLeetcode },
+];
 
 export default function Hero() {
   return (
-    <section
-      id="hero"
-      className="min-h-screen flex items-center relative overflow-hidden border-b border-white/[0.06]"
-    >
-      {/* Vertical guide lines */}
-      <div className="absolute left-[calc(50%-380px)] top-0 bottom-0 w-px bg-white/[0.035] hidden xl:block pointer-events-none" />
-      <div className="absolute right-[calc(50%-380px)] top-0 bottom-0 w-px bg-white/[0.035] hidden xl:block pointer-events-none" />
-
-      {/* Watermark number */}
-      <div className="absolute right-[-2vw] top-1/2 -translate-y-1/2 font-space font-bold text-[28vw] text-white/[0.018] leading-none select-none pointer-events-none">
-        01
-      </div>
-
-      {/* Year tag */}
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.1 }}
-        className="absolute top-7 right-6 md:right-12 text-[10px] font-mono text-white/18 tracking-widest"
-      >
-        2025
-      </motion.span>
-
-      <div className="max-w-7xl mx-auto px-6 md:px-12 w-full py-24 grid md:grid-cols-[1fr_auto] gap-16 items-center">
-
-        {/* ── Left ── */}
-        <div>
-          {/* Role tag */}
-          <motion.div
-            initial={{ opacity: 0, x: -16 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.15, duration: 0.6 }}
-            className="flex items-center gap-3 mb-8"
-          >
-            <div className="w-7 h-px bg-white/30" />
-            <span className="text-[10px] uppercase tracking-[0.28em] text-white/35 font-mono">
-              Backend Software Engineer
-            </span>
-          </motion.div>
-
-          {/* Name — slide-up reveal */}
-          <div className="mb-10 space-y-1">
-            <div className="overflow-hidden">
-              <motion.h1
-                initial={{ y: "110%" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.9, delay: 0.3, ease: EASE }}
-                className="font-space font-bold leading-[0.88] tracking-tight text-white"
-                style={{ fontSize: "clamp(62px, 10.5vw, 148px)" }}
-              >
-                VISHNU
-              </motion.h1>
-            </div>
-            <div className="overflow-hidden">
-              <motion.h1
-                initial={{ y: "110%" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.9, delay: 0.46, ease: EASE }}
-                className="font-space font-bold leading-[0.88] tracking-tight text-white/25"
-                style={{ fontSize: "clamp(62px, 10.5vw, 148px)" }}
-              >
-                P R
-              </motion.h1>
-            </div>
-          </div>
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.76, duration: 0.6 }}
-            className="text-white/30 text-[13px] leading-relaxed max-w-[380px] mb-10 font-mono"
-          >
-            2+ years building production-grade distributed systems.
-            Leading backend architecture — microservices, gRPC, AI
-            deployment, cloud infrastructure.
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.5 }}
-            className="flex items-center gap-8 mb-12"
-          >
-            <a
-              href="#projects"
-              className="group flex items-center gap-3 text-[13px] font-medium text-white"
-            >
-              <span className="relative">
-                View Work
-                <span className="absolute -bottom-px left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-300" />
-              </span>
-              <span className="text-white/30 text-xs group-hover:translate-x-1 transition-transform duration-200">
-                →
-              </span>
-            </a>
-            <a
-              href="#contact"
-              className="text-[13px] text-white/28 hover:text-white transition-colors"
-            >
-              Get in touch
-            </a>
-          </motion.div>
-
-          {/* Social */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.05 }}
-            className="flex items-center gap-7"
-          >
-            <a
-              href="https://github.com/vishnupr01"
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-2 text-[11px] font-mono text-white/22 hover:text-white transition-colors"
-            >
-              <FaGithub className="text-sm" /> GitHub
-            </a>
-            <a
-              href="https://linkedin.com/in/vishnu-p-r-b46998247/"
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-2 text-[11px] font-mono text-white/22 hover:text-white transition-colors"
-            >
-              <FaLinkedin className="text-sm" /> LinkedIn
-            </a>
-            <a
-              href="https://leetcode.com/u/vpr6748"
-              target="_blank"
-              rel="noreferrer"
-              className="text-[11px] font-mono text-white/22 hover:text-white transition-colors"
-            >
-              LeetCode
-            </a>
-          </motion.div>
-        </div>
-
-        {/* ── Right — photo ── */}
+    <section className="pt-28 pb-24 md:pt-40 md:pb-32 grid md:grid-cols-[minmax(0,1fr)_300px] lg:grid-cols-[minmax(0,1fr)_340px] gap-12 md:gap-14 items-center">
+      <div className="order-2 md:order-1">
         <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.5, duration: 1, ease: EASE }}
-          className="hidden md:block"
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease }}
         >
-          <div className="relative">
-            <div className="absolute -right-4 -bottom-4 w-full h-full border border-white/12" />
-            <div className="absolute -right-8 -bottom-8 w-full h-full border border-white/[0.05]" />
-            <img
-              src={profile}
-              alt="Vishnu P R"
-              className="relative w-[220px] h-[280px] object-cover grayscale contrast-110 brightness-[0.85] block"
-            />
+          <p className="text-[15px]">
+            <span className="font-medium">{profile.name}</span>
+            <span className="text-muted"> — {profile.role}</span>
+          </p>
+
+          <h1 className="mt-6 text-[42px] sm:text-[52px] lg:text-[60px] font-medium leading-[1.02] tracking-[-0.035em] max-w-[820px]">
+            I design and build{" "}
+            <span className="font-serif italic font-normal tracking-[-0.01em] text-accent">scalable backend systems.</span>
+          </h1>
+
+          <p className="mt-7 text-[17px] md:text-[18px] leading-relaxed text-muted max-w-[600px]">
+            Software Engineer with 2+ years in Node.js, NestJS and TypeScript. I lead the backend of a 7-service
+            hiring platform built for 100k+ users.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.15, ease }}
+          className="mt-10 flex flex-wrap items-center gap-3"
+        >
+          <a
+            href={profile.resume.href}
+            download={profile.resume.filename}
+            className="group inline-flex items-center gap-2 rounded-full bg-fg px-6 py-3 text-[15px] font-medium text-bg hover:opacity-90 transition-opacity"
+          >
+            Download résumé
+            <FiDownload className="transition-transform group-hover:translate-y-0.5" />
+          </a>
+          <a
+            href="#contact"
+            className="group inline-flex items-center gap-2 rounded-full border border-line px-6 py-3 text-[15px] font-medium hover:border-fg/40 transition-colors"
+          >
+            Get in touch
+            <FiArrowRight className="transition-transform group-hover:translate-x-0.5" />
+          </a>
+          <div className="flex items-center gap-1 -ml-2.5">
+            {socials.map(({ href, label, icon: Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full text-muted hover:text-fg hover:bg-fg/5 transition-colors"
+              >
+                <Icon className="text-[19px]" />
+              </a>
+            ))}
           </div>
         </motion.div>
 
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="mt-10 flex items-start gap-2.5 text-[14px] text-muted"
+        >
+          <span className="relative mt-[7px] flex h-2 w-2 shrink-0">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ok opacity-60" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-ok" />
+          </span>
+          {profile.availability}
+        </motion.p>
       </div>
 
-      {/* Scroll cue */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.3 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+      <motion.figure
+        initial={{ opacity: 0, scale: 0.97 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.1, ease }}
+        className="order-1 md:order-2 w-full max-w-[280px] sm:max-w-[320px] md:max-w-none rounded-[28px] border border-line bg-surface p-2.5"
       >
-        <div className="w-px h-10 bg-gradient-to-b from-transparent via-white/20 to-transparent animate-pulse" />
-        <span className="text-[9px] font-mono uppercase tracking-[0.3em] text-white/18">
-          Scroll
-        </span>
-      </motion.div>
+        <img
+          src={photo}
+          alt="Vishnu P R, Software Engineer"
+          width={540}
+          height={675}
+          className="aspect-[4/5] w-full rounded-[20px] object-cover object-top"
+        />
+      </motion.figure>
     </section>
   );
 }

@@ -1,0 +1,127 @@
+import type { ComponentType, CSSProperties } from "react";
+import { FaAws, FaJava } from "react-icons/fa";
+import {
+  SiAmazoncloudwatch,
+  SiAmazonec2,
+  SiAmazons3,
+  SiCelery,
+  SiCss3,
+  SiDocker,
+  SiExpress,
+  SiFirebase,
+  SiGit,
+  SiGithubactions,
+  SiGithubcopilot,
+  SiGrafana,
+  SiHtml5,
+  SiJavascript,
+  SiJsonwebtokens,
+  SiMongodb,
+  SiMysql,
+  SiNestjs,
+  SiNextdotjs,
+  SiNginx,
+  SiNodedotjs,
+  SiNvidia,
+  SiNx,
+  SiOpenai,
+  SiPm2,
+  SiPostgresql,
+  SiPostman,
+  SiPrisma,
+  SiPython,
+  SiReact,
+  SiRedis,
+  SiRedux,
+  SiSequelize,
+  SiSocketdotio,
+  SiSwagger,
+  SiTailwindcss,
+  SiTypescript,
+} from "react-icons/si";
+import GrpcMark from "../components/GrpcMark";
+
+type IconComponent = ComponentType<{ className?: string; style?: CSSProperties; "aria-hidden"?: boolean }>;
+
+export interface Tech {
+  name: string;
+  icon: IconComponent;
+  // Brand colour; null = brand is black/near-black, so use the text colour to stay visible in dark mode
+  color: string | null;
+}
+
+const t = (name: string, icon: IconComponent, color: string | null): Tech => ({ name, icon, color });
+
+// Keyed by the exact names used in data/skills.ts
+export const techIcons: Record<string, Tech> = {
+  TypeScript: t("TypeScript", SiTypescript, "#3178C6"),
+  JavaScript: t("JavaScript", SiJavascript, "#F0DB4F"),
+  Java: t("Java", FaJava, "#E76F00"),
+  Python: t("Python", SiPython, "#3776AB"),
+  "Node.js": t("Node.js", SiNodedotjs, "#5FA04E"),
+  NestJS: t("NestJS", SiNestjs, "#E0234E"),
+  "Express.js": t("Express.js", SiExpress, null),
+  gRPC: t("gRPC", GrpcMark, "#2DA6B0"),
+  "Nx Monorepo": t("Nx", SiNx, null),
+  "Socket.IO": t("Socket.IO", SiSocketdotio, null),
+  "Redis Pub/Sub": t("Redis", SiRedis, "#FF4438"),
+  PostgreSQL: t("PostgreSQL", SiPostgresql, "#4169E1"),
+  MySQL: t("MySQL", SiMysql, "#4479A1"),
+  MongoDB: t("MongoDB", SiMongodb, "#47A248"),
+  Redis: t("Redis", SiRedis, "#FF4438"),
+  "Firebase Firestore": t("Firebase", SiFirebase, "#FFA000"),
+  Prisma: t("Prisma", SiPrisma, null),
+  Sequelize: t("Sequelize", SiSequelize, "#52B0E7"),
+  "AWS EC2": t("AWS EC2", SiAmazonec2, "#FF9900"),
+  "AWS S3": t("AWS S3", SiAmazons3, "#569A31"),
+  "AWS ECR": t("AWS", FaAws, "#FF9900"),
+  Docker: t("Docker", SiDocker, "#2496ED"),
+  "GitHub Actions": t("GitHub Actions", SiGithubactions, "#2088FF"),
+  Nginx: t("Nginx", SiNginx, "#009639"),
+  PM2: t("PM2", SiPm2, null),
+  "AWS CloudWatch": t("CloudWatch", SiAmazoncloudwatch, "#FF4F8B"),
+  Grafana: t("Grafana", SiGrafana, "#F46800"),
+  Celery: t("Celery", SiCelery, "#37814A"),
+  JWT: t("JWT", SiJsonwebtokens, null),
+  "GPU inference in Docker": t("NVIDIA GPU", SiNvidia, "#76B900"),
+  ChatGPT: t("ChatGPT", SiOpenai, null),
+  "GitHub Copilot": t("GitHub Copilot", SiGithubcopilot, null),
+  Postman: t("Postman", SiPostman, "#FF6C37"),
+  "Swagger / OpenAPI": t("Swagger", SiSwagger, "#6BA539"),
+  React: t("React", SiReact, "#23B5D8"),
+  "Next.js": t("Next.js", SiNextdotjs, null),
+  "Redux Toolkit": t("Redux", SiRedux, "#764ABC"),
+  "Tailwind CSS": t("Tailwind CSS", SiTailwindcss, "#06B6D4"),
+  HTML5: t("HTML5", SiHtml5, "#E34F26"),
+  CSS3: t("CSS3", SiCss3, "#1572B6"),
+  Git: t("Git", SiGit, "#F05032"),
+};
+
+// Order for the scrolling logo strip — the stack a backend recruiter looks for first
+export const marqueeStack: Tech[] = [
+  "TypeScript",
+  "Node.js",
+  "NestJS",
+  "PostgreSQL",
+  "Redis",
+  "gRPC",
+  "Docker",
+  "AWS ECR",
+  "Prisma",
+  "Socket.IO",
+  "MongoDB",
+  "GitHub Actions",
+  "Nx Monorepo",
+  "Grafana",
+  "React",
+  "Next.js",
+  "JavaScript",
+  "Python",
+  "Java",
+  "MySQL",
+  "Express.js",
+  "Postman",
+  "Swagger / OpenAPI",
+  "Nginx",
+  "Git",
+].map((name) => techIcons[name]);

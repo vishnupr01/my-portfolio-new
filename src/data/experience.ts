@@ -20,29 +20,28 @@ export const experience: Experience[] = [
     location: "Bangalore, India",
     subRoles: [
       {
-        title: "PlaceMux — Backend Lead (Current Project)",
-        stack: "NestJS · TypeScript · PostgreSQL · Prisma · gRPC · Redis · Docker · AWS (EC2, ECR, S3) · GitHub Actions · Nx Monorepo · Celery",
+        title: "PlaceMux — Backend Lead (Technical Hiring Platform)",
+        stack: "NestJS · TypeScript · PostgreSQL · Prisma · gRPC · Redis · Docker · AWS (EC2, ECR, S3, CloudWatch) · GitHub Actions · Nx Monorepo · Grafana",
         points: [
-          "Leading backend architecture for PlaceMux, a professional networking & technical hiring platform — solely responsible for all system design and infrastructure decisions from scratch",
-          "Architected a 7-service Nx monorepo microservices system — API Gateway, Auth, Company, Interview, Admin, Student, and Proctoring services — each independently containerized and deployed",
-          "Implemented gRPC for inter-service communication with dedicated HTTP and gRPC ports per service enabling type-safe, high-performance internal API contracts",
-          "Built smart GitHub Actions CI/CD using Nx affected builds — detects changed services on every push and rebuilds only affected containers, reducing deployment time significantly",
-          "Deployed GPU-enabled AI proctoring system — Dockerized ML model with Nvidia GPU support, Redis-backed Celery workers for async frame and audio processing, pushed to AWS ECR via automated pipeline",
-          "Implemented PostgreSQL with Prisma ORM across all services with per-service schema management and automated Prisma client generation in CI pipeline"
-        ]
+          "Led the analysis and design of the backend for a 7-service microservices platform, built to scale to 100,000+ users — responsible for system design and infrastructure decisions from scratch",
+          "Cut internal response latency by ~25% by moving service-to-service communication from REST to gRPC",
+          "Integrated 4 AI/ML models into the product, including a GPU-backed AI proctoring system reaching 80–90% detection accuracy in production",
+          "Built a GitHub Actions + Docker CI/CD pipeline that rebuilds only changed services (Nx affected), cutting build and deploy time by 40–60%",
+          "Programmed REST APIs and integrated them with React components, delivering features from requirements to production in Agile sprints",
+          "Documented every service API with Swagger/OpenAPI and Postman; monitored production health with AWS CloudWatch and Grafana",
+        ],
       },
       {
-        title: "MeetMux — Backend Engineer (Social Platform)",
+        title: "MeetMux — Backend Engineer (iOS & Android App)",
         stack: "Node.js · NestJS · TypeScript · PostgreSQL · Sequelize · Redis · Socket.IO · BullMQ · Firebase · AWS",
         points: [
-          "Built backend following Clean Architecture — clear separation of domain, application, and infrastructure layers enabling maintainable and testable code",
-          "Designed and built real-time chat system using Socket.IO with Redis Pub/Sub to sync socket events across multiple instances for horizontal scalability",
-          "Built core social platform features — posts, likes, comments, follow/unfollow, user interactions — consumed by iOS and Android mobile apps",
-          "Integrated Firebase Cloud Messaging (FCM) for push notifications; built BullMQ worker system on Redis for async background job processing",
-          "Built user discovery using interest-based matching combined with geolocation distance scoring",
-          "Optimized PostgreSQL queries with Sequelize, added strategic indexing, and resolved connection pool issues improving overall backend stability"
-        ]
-      }
-    ]
-  }
+          "Owned 6+ backend modules end to end, from gathering requirements to production, serving live users",
+          "Built a real-time chat system from scratch with Socket.IO and Redis Pub/Sub, designed for 10,000 concurrent connections across multiple instances",
+          "Fixed instability under load by resolving database connection-pool issues and speeding up slow PostgreSQL queries with targeted indexes",
+          "Defined API contracts and backend-driven configuration with the iOS and Android teams",
+          "Built push notifications (FCM), BullMQ background jobs, and interest + geolocation based user discovery",
+        ],
+      },
+    ],
+  },
 ];

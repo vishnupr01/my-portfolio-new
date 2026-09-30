@@ -1,99 +1,102 @@
-import { motion } from "framer-motion";
+import { FiArrowUpRight } from "react-icons/fi";
+import Section, { Reveal } from "../components/Section";
 import { projects } from "../data/projects";
 
-export default function Projects() {
+function Links({ project }: { project: (typeof projects)[number] }) {
   return (
-    <section id="projects" className="py-32 border-b border-white/[0.06]">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+    <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[13.5px]">
+      {project.links.map((l) => (
+        <a
+          key={l.url}
+          href={l.url}
+          target="_blank"
+          rel="noreferrer"
+          className="group inline-flex items-center gap-1 text-fg/80 hover:text-fg"
+        >
+          <span className="link">{l.label}</span>
+          <FiArrowUpRight className="text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        </a>
+      ))}
+      {project.demo ? (
+        <a href={project.demo} target="_blank" rel="noreferrer" className="group inline-flex items-center gap-1 text-fg/80 hover:text-fg">
+          <span className="link">Live</span>
+          <FiArrowUpRight className="text-muted" />
+        </a>
+      ) : project.status ? (
+        <span className="inline-flex items-center gap-2 rounded-full border border-line px-2.5 py-0.5 font-mono text-[11.5px] text-muted">
+          <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
+          Live: {project.status}
+        </span>
+      ) : null}
+    </div>
+  );
+}
 
-        {/* Section label */}
-        <div className="flex items-center gap-3 mb-20">
-          <span className="text-[9px] font-mono text-white/22 tracking-widest">04</span>
-          <div className="w-7 h-px bg-white/14" />
-          <span className="text-[9px] font-mono text-white/22 uppercase tracking-[0.25em]">Projects</span>
-        </div>
+export default function Projects() {
+  const [featured, ...rest] = projects;
 
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-          <h2
-            className="font-space font-bold text-white leading-[1.0]"
-            style={{ fontSize: "clamp(36px, 4.5vw, 60px)" }}
-          >
-            Personal<br />
-            <span className="text-white/22">Projects</span>
-          </h2>
-          <p className="text-[11px] font-mono text-white/25 max-w-xs leading-relaxed">
-            Side projects built to explore real engineering problems end-to-end.
-          </p>
-        </div>
+  return (
+    <Section id="projects" title="Selected" accent="projects">
+      {/* Featured */}
+      <Reveal>
+        <article className="rounded-2xl border border-line bg-surface p-6 md:p-8">
+          <p className="font-mono text-[12px] text-accent mb-3">Latest · personal project</p>
+          <h3 className="text-[24px] font-medium tracking-[-0.02em]">{featured.title}</h3>
+          <div className="mt-3">
+            <Links project={featured} />
+          </div>
+          {featured.tagline && <p className="mt-3 text-[16px] text-fg/85 max-w-[620px]">{featured.tagline}</p>}
+          <p className="mt-2 text-muted max-w-[620px]">{featured.description}</p>
 
-        {/* Numbered list */}
-        <div className="divide-y divide-white/[0.06]">
-          {projects.map((project, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.08, duration: 0.6 }}
-              className="group py-10 hover:bg-white/[0.018] transition-colors -mx-6 md:-mx-12 px-6 md:px-12"
-            >
-              <div className="flex items-start gap-6 md:gap-10">
-
-                {/* Index number */}
-                <span className="text-[10px] font-mono text-white/18 mt-1 shrink-0 w-5">
-                  {String(idx + 1).padStart(2, "0")}
-                </span>
-
-                {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-3 mb-4">
-                    <h3 className="text-lg font-semibold text-white/80 group-hover:text-white transition-colors leading-tight">
-                      {project.title}
-                    </h3>
-                    <div className="flex items-center gap-5 shrink-0">
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-[11px] font-mono text-white/25 hover:text-white transition-colors"
-                      >
-                        GitHub →
-                      </a>
-                      {project.demo && (
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-[11px] font-mono text-white/25 hover:text-white transition-colors"
-                        >
-                          Live →
-                        </a>
-                      )}
-                    </div>
+          {featured.metrics && (
+            <div className="mt-7">
+              <dl className="grid grid-cols-2 md:grid-cols-4 gap-px overflow-hidden rounded-xl border border-line bg-line">
+                {featured.metrics.map((m) => (
+                  <div key={m.label} className="bg-surface p-4">
+                    <dt className="sr-only">{m.label}</dt>
+                    <dd>
+                      <span className="num block text-[24px] font-medium tracking-[-0.02em] leading-none">{m.value}</span>
+                      <span className="mt-2 block text-[12.5px] leading-snug text-muted">{m.label}</span>
+                    </dd>
                   </div>
+                ))}
+              </dl>
+              {featured.metricsNote && (
+                <p className="mt-3 font-mono text-[11.5px] leading-relaxed text-muted">{featured.metricsNote}</p>
+              )}
+            </div>
+          )}
 
-                  <p className="text-[13px] text-white/35 leading-relaxed mb-5 max-w-2xl">
-                    {project.description}
-                  </p>
+          {featured.highlights && (
+            <ul className="mt-7 space-y-2.5">
+              {featured.highlights.map((h) => (
+                <li key={h} className="flex gap-3 text-[14.5px] text-fg/80 leading-relaxed">
+                  <span aria-hidden className="mt-[11px] h-px w-3 shrink-0 bg-muted/60" />
+                  <span>{h}</span>
+                </li>
+              ))}
+            </ul>
+          )}
 
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-[10px] font-mono text-white/22 border border-white/[0.08] px-2.5 py-0.5 rounded-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+          <p className="mt-6 font-mono text-[12px] text-muted">{featured.tech.join(" · ")}</p>
+        </article>
+      </Reveal>
 
+      {/* Others */}
+      <div className="mt-6 divide-y divide-line">
+        {rest.map((p, i) => (
+          <Reveal key={p.title} delay={i * 0.05}>
+            <article className="py-7 grid md:grid-cols-[1fr_auto] gap-x-8 gap-y-3">
+              <div>
+                <h3 className="text-[17px] font-medium">{p.title}</h3>
+                <p className="mt-1.5 text-muted max-w-[560px]">{p.description}</p>
+                <p className="mt-3 font-mono text-[12px] text-muted">{p.tech.join(" · ")}</p>
               </div>
-            </motion.div>
-          ))}
-        </div>
-
+              <Links project={p} />
+            </article>
+          </Reveal>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }

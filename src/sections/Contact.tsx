@@ -1,88 +1,74 @@
-import { motion } from "framer-motion";
-import {
-  FaGithub,
-  FaLinkedin,
-  FaEnvelope,
-  FaPhoneAlt,
-  FaWhatsapp,
-} from "react-icons/fa";
+import { useState } from "react";
+import { FiArrowUpRight, FiCheck, FiCopy } from "react-icons/fi";
+import Section, { Reveal } from "../components/Section";
+import { profile } from "../data/profile";
 
-const links = [
-  { num: "01", icon: FaEnvelope, label: "vpr6748@gmail.com", href: "mailto:vpr6748@gmail.com" },
-  { num: "02", icon: FaPhoneAlt, label: "+91 96563 99230", href: "tel:+919656399230" },
-  { num: "03", icon: FaLinkedin, label: "LinkedIn", href: "https://linkedin.com/in/vishnu-p-r-b46998247/", external: true },
-  { num: "04", icon: FaGithub, label: "GitHub", href: "https://github.com/vishnupr01", external: true },
-  { num: "05", icon: FaWhatsapp, label: "WhatsApp — +91 9207033463", href: "https://wa.me/919656399230", external: true },
+const rows = [
+  { label: "Call", value: profile.phone.label, href: profile.phone.href },
+  { label: "WhatsApp", value: profile.whatsapp.label, href: profile.whatsapp.href, external: true },
+  { label: "LinkedIn", value: "vishnu-p-r", href: profile.socials.linkedin, external: true },
+  { label: "GitHub", value: "vishnupr01", href: profile.socials.github, external: true },
+  { label: "Résumé", value: "Download PDF", href: profile.resume.href, download: profile.resume.filename },
 ];
 
 export default function Contact() {
+  const [copied, setCopied] = useState(false);
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(profile.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      window.location.href = `mailto:${profile.email}`;
+    }
+  };
+
   return (
-    <section id="contact" className="py-32">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+    <Section id="contact" title="Let's build something" accent="reliable.">
+      <Reveal>
+        <p className="text-muted max-w-[520px]">
+          I'm open to Backend and Full Stack roles — any location, remote or relocation. The fastest way to reach me is
+          email.
+        </p>
 
-        {/* Section label */}
-        <div className="flex items-center gap-3 mb-20">
-          <span className="text-[9px] font-mono text-white/22 tracking-widest">06</span>
-          <div className="w-7 h-px bg-white/14" />
-          <span className="text-[9px] font-mono text-white/22 uppercase tracking-[0.25em]">Contact</span>
+        <div className="mt-8 flex flex-wrap items-center gap-3">
+          <a
+            href={`mailto:${profile.email}`}
+            className="text-[24px] md:text-[30px] font-medium tracking-[-0.02em] link"
+          >
+            {profile.email}
+          </a>
+          <button
+            type="button"
+            onClick={copy}
+            className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-[12.5px] text-muted hover:text-fg hover:border-fg/30 transition-colors"
+          >
+            {copied ? <FiCheck className="text-ok" /> : <FiCopy />}
+            {copied ? "Copied" : "Copy"}
+          </button>
         </div>
+      </Reveal>
 
-        {/* Big CTA heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="mb-20"
-        >
-          <h2
-            className="font-space font-bold text-white leading-none mb-0"
-            style={{ fontSize: "clamp(48px, 8vw, 120px)" }}
-          >
-            Let's work
-          </h2>
-          <h2
-            className="font-space font-bold text-white/18 leading-none"
-            style={{ fontSize: "clamp(48px, 8vw, 120px)" }}
-          >
-            together.
-          </h2>
-        </motion.div>
-
-        {/* Contact links */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="max-w-2xl divide-y divide-white/[0.06]"
-        >
-          {links.map((link) => {
-            const Icon = link.icon;
-            return (
+      <Reveal delay={0.08}>
+        <ul className="mt-12 divide-y divide-line border-y border-line max-w-[620px]">
+          {rows.map((r) => (
+            <li key={r.label}>
               <a
-                key={link.num}
-                href={link.href}
-                target={link.external ? "_blank" : undefined}
-                rel={link.external ? "noreferrer" : undefined}
-                className="flex items-center gap-5 py-5 group"
+                href={r.href}
+                target={r.external ? "_blank" : undefined}
+                rel={r.external ? "noreferrer" : undefined}
+                download={r.download}
+                className="group flex items-center gap-6 py-4"
               >
-                <span className="text-[9px] font-mono text-white/18 w-5 shrink-0">
-                  {link.num}
-                </span>
-                <Icon className="text-sm text-white/25 group-hover:text-white transition-colors shrink-0" />
-                <span className="text-[13px] text-white/60 group-hover:text-white transition-colors flex-1">
-                  {link.label}
-                </span>
-                <span className="text-white/18 group-hover:text-white/50 group-hover:translate-x-1 transition-all text-xs">
-                  →
-                </span>
+                <span className="w-24 shrink-0 font-mono text-[12px] text-muted">{r.label}</span>
+                <span className="flex-1 text-fg/85 group-hover:text-fg">{r.value}</span>
+                <FiArrowUpRight className="text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg" />
               </a>
-            );
-          })}
-        </motion.div>
-
-      </div>
-    </section>
+            </li>
+          ))}
+        </ul>
+      </Reveal>
+    </Section>
   );
 }
